@@ -1,0 +1,58 @@
+@page "/roles"
+@inject RoleService RoleService
+@attribute [StreamRendering]
+
+<PageTitle>Roles</PageTitle>
+
+<h1>Roles</h1>
+
+@if (roles == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Role</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var role in roles)
+      {
+        <tr>
+          <td>@role.Date.ToShortDateString()</td>
+          <td>@role.RoleName</td>
+          <td>@role.RoleDescription</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+@code {
+
+
+  private List<Role>? roles;
+
+  protected override async Task OnInitializedAsync()
+  {
+  // Simulate asynchronous loading to demonstrate streaming rendering
+    @* roles = await RoleService.GetProductsAsync(); *@
+
+
+  }
+
+  @* private class Role
+{
+public DateOnly Date { get; set; }
+public string? RoleName { get; set; }
+public string? RoleDescription { get; set; }
+
+
+} *@
+
+}

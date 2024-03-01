@@ -1,0 +1,66 @@
+@page "/access-rights"
+
+@attribute [StreamRendering]
+
+<PageTitle>Access Rights</PageTitle>
+
+<h1>Access Rights</h1>
+
+@if (roles == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Temp. (C)</th>
+        <th>Temp. (F)</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var role in roles)
+      {
+        <tr>
+          <td>@role.Date.ToShortDateString()</td>
+          <td>@role.TemperatureC</td>
+          <td>@role.TemperatureF</td>
+          <td>@role.Summary</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+@code {
+  private Role[]? roles;
+
+  protected override async Task OnInitializedAsync()
+  {
+    // Simulate asynchronous loading to demonstrate streaming rendering
+    await Task.Delay(500);
+
+    var startDate = DateOnly.FromDateTime(DateTime.Now);
+    var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering",
+"Scorching" };
+
+    roles = Enumerable.Range(1, 5).Select(index => new Role
+      {
+        Date = startDate.AddDays(index),
+        TemperatureC = Random.Shared.Next(-20, 55),
+        Summary = summaries[Random.Shared.Next(summaries.Length)]
+      }).ToArray();
+  }
+
+  private class Role
+  {
+    public DateOnly Date { get; set; }
+    public int TemperatureC { get; set; }
+    public string? Summary { get; set; }
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+  }
+
+}
