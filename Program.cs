@@ -1,10 +1,17 @@
 using DatabaseManagementApp.Components;
+using DatabaseManagementApp.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+// Register your UserService
+builder.Services.AddScoped<UserService>();
 
+builder.Services.AddHttpClient();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+
 
 var app = builder.Build();
 
@@ -19,8 +26,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
 
+app.UseRouting();
+app.UseAuthorization();
+app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

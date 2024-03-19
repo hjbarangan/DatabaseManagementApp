@@ -1,19 +1,29 @@
 @page "/user"
-@rendermode InteractiveServer
+@using DatabaseManagementApp.Models
+@using DatabaseManagementApp.Services
+@inject UserService UserService
 
-<PageTitle>Users</PageTitle>
+<h1>User Management</h1>
 
-<h1>Users</h1>
+<p>This is the user management page.</p>
 
+@if (Users != null)
+{
+    <ul>
+        @foreach (var user in Users)
+        {
+            <li>@user.usename</li>
+            <li>@user.passwd</li>
+        }
+    </ul>
+}
 
 @code {
-    private int currentCount = 0;
+    private List<UserModel>? Users;
 
-    [Parameter]
-    public int IncrementAmount { get; set; } = 1;
-
-    private void IncrementCount()
+    protected override async Task OnInitializedAsync()
     {
-     currentCount += IncrementAmount;
+        // Call a method on the UserService to fetch user data
+        Users = await UserService.GetUsers();
     }
 }
