@@ -21,7 +21,7 @@ namespace DatabaseManagementApp.Services
     try
     {
         // Make HTTP GET request to the API endpoint to fetch users
-        var response = await _httpClient.GetFromJsonAsync<List<UserModel>>($"{BaseUrl}api/DatabaseManager/check-postgres");
+        var response = await _httpClient.GetFromJsonAsync<List<UserModel>>($"{BaseUrl}api/DatabaseManager/get-postgres-users");
         return response!;
     }
     catch (Exception ex)

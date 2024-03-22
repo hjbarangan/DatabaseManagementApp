@@ -1,5 +1,17 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/Inter-Regular.woff2') format('woff2'),
+         url('/fonts/Inter/Inter-Regular.woff') format('woff');
+  }
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins/Poppins-Medium.ttf') format('woff2'),
+         url('/fonts/Poppins/Poppins-Medium.ttf') format('woff');
+
+  }
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 
 a, .btn-link {

@@ -2,6 +2,7 @@ namespace DatabaseManagementApp.Models;
 
 public class UserModel
 {
-    public string? usename { get; set; }
-    public string? passwd { get; set; }
+    public uint usesysid { get; set; }
+    public string? username { get; set; }
+    public string? role { get; set; }
 }

@@ -3,19 +3,42 @@
 @using DatabaseManagementApp.Services
 @inject UserService UserService
 
-<h1>User Management</h1>
+<div>
+<h1>Users</h1>
+</div>
 
-<p>This is the user management page.</p>
 
-@if (Users != null)
+
+@if (Users == null)
 {
-    <ul>
-        @foreach (var user in Users)
-        {
-            <li>@user.usename</li>
-            <li>@user.passwd</li>
-        }
-    </ul>
+    <p><em>No Users available</em></p>
+}
+
+else
+{
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role/s</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Users)
+            {
+                <tr>
+                    <td>@user.usesysid</td>
+                    <td>@user.username</td>
+                    <td>@user.role</td>
+                    <td> <button type="button" class="btn-primary">View</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {
